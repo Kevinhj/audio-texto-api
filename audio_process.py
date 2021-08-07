@@ -3,7 +3,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 r = sr.Recognizer()
 
-call = sr.AudioFile('unprocessed_audio/grabacion-06-08-2021-pos.wav')
+call = sr.AudioFile('unprocessed_interactions/audio/informacion/grabacion-06-08-2021-pos.wav')
 with call as source:
     audio = r.record(source)
 
