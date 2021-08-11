@@ -1,10 +1,12 @@
 import speech_recognition as sr
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
+
+
 r = sr.Recognizer()
 
 call = sr.AudioFile('unprocessed_interactions/audio/informacion/grabacion-06-08-2021-pos.wav')
-#llamada = sr.AudioFile('')
+
 with call as source:
     audio = r.record(source)
 

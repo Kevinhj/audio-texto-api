@@ -1,0 +1,1 @@
+AUDIO = 'C:\\Users\\khkev\\PycharmProjects\\audio-texto-api\\unprocessed_interactions\\audio\\'
