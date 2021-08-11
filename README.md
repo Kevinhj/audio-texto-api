@@ -3,8 +3,8 @@
 El trabajo acá desarrollado pretende presentar una solución para el proyecto final de Tecnología de Base de Datos, 
 
 El operador utilizando un aplicativo interno de la universidad, guarda el archivo con el siguiente formato:
-`dniOperador_dniCliente-dia-mes-año hora`
-`206580985_207850699-08-07-2021 20:02:21.550`
+`dniOperador_dniCliente-dia-mes-año_hora-minutos-segundos`
+`303090138_303250244-27-07-2021_07-55-25.wav`
 
 Ademas, el operador con el aplicativo interno cuando recibe la llamada, selecciona el motivo de la llamada o chat, 
 informacion(horario de cursos, oficinals), matriculas, cobros(letras de cambio pendientes de pago), etc con base en eso; 
