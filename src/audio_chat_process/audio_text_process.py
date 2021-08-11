@@ -1,7 +1,7 @@
 import speech_recognition as sr
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from src.utilities.file_names import get_audio_file_names
-from src.configs import directory_paths
+from src.configs import unprocessed_interactions
 
 
 # Process the calls to text and apply sentiment analysis
@@ -24,7 +24,7 @@ def process_call_recording():
 
 # convert call to text, it receives the folder(informacion, matricula, etc) and the audio name
 def convert_call_to_text(folder, audio):
-    call = sr.AudioFile(directory_paths.AUDIO + folder + '/' + audio)
+    call = sr.AudioFile(unprocessed_interactions.AUDIO_PATH + folder + '/' + audio)
     r = sr.Recognizer()
 
     with call as source:
