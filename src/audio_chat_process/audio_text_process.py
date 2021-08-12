@@ -1,6 +1,8 @@
 import speech_recognition as sr
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from src.utilities.file_names import get_audio_file_names
+from src.utilities.base_utility import get_audio_file_names
+from src.utilities.base_utility import get_id_catalogo_interaccion
+from src.configs import interactions
 from src.configs import unprocessed_interactions
 
 
@@ -15,10 +17,15 @@ def process_call_recording():
         print(f"Procesando llamadas de la carpeta: {folder}")
         print(f"Lista de audios encontrados: {audios}")
 
+        id_catalogo_interaccion = get_id_catalogo_interaccion(folder)
+        id_medio_interaccion = interactions.LLAMADA # always call with id 1
+
         # loop over the audios under a given folder
         for audio in audios:
             text = convert_call_to_text(folder, audio)
-            # Analisis de Sentimiento
+
+            # Analisis de Sentimiento (antes de aplicar analisis de sentimiento insert ontbInteracciones y retornar
+            # el id)
             perform_sentiment_analysis(text)
 
 
