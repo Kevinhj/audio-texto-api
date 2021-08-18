@@ -19,3 +19,8 @@ def get_id_catalogo_interaccion(subfolder):
         return interactions.MATRICULA
     else:
         return interactions.COBRO
+
+
+def get_cliente_operador_dni(file_name):
+    dni = file_name.split("_")
+    return dni

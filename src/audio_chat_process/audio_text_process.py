@@ -2,8 +2,10 @@ import speech_recognition as sr
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from src.utilities.base_utility import get_audio_file_names
 from src.utilities.base_utility import get_id_catalogo_interaccion
+from src.utilities.base_utility import get_cliente_operador_dni
 from src.configs import interactions
 from src.configs import unprocessed_interactions
+from datetime import date
 
 
 # Process the calls to text and apply sentiment analysis
@@ -17,12 +19,20 @@ def process_call_recording():
         print(f"Procesando llamadas de la carpeta: {folder}")
         print(f"Lista de audios encontrados: {audios}")
 
-        id_catalogo_interaccion = get_id_catalogo_interaccion(folder)
-        id_medio_interaccion = interactions.LLAMADA # always call with id 1
+        id_catalogo_interaccion = get_id_catalogo_interaccion(folder) # [categoriainteraccion(FK)]
+        id_medio_interaccion = interactions.LLAMADA # always call with id 1 [mediointeraccion(FK)]
 
         # loop over the audios under a given folder
         for audio in audios:
-            text = convert_call_to_text(folder, audio)
+            text = convert_call_to_text(folder, audio) # [conversacion]
+            print(text)
+            call_date = date.today() # [fechainteraccion]
+
+            dni = get_cliente_operador_dni(audio)
+            dni_operador = dni[0] # dni del operador a utilizar para obtener el operador id en la bd
+            dni_cliente = dni[1] # dni del cliente a utilizar para obtener el cliente id en la bd
+
+            # call here the method to insert on tbInteracciones
 
             # Analisis de Sentimiento (antes de aplicar analisis de sentimiento insert ontbInteracciones y retornar
             # el id)
@@ -67,6 +77,7 @@ def perform_sentiment_analysis(text):
         print("Neutral")
 
     print("")
+    # call here the method to insert on tbSentimientoInteracciones
 
 
 process_call_recording()
