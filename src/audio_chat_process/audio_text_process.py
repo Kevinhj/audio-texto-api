@@ -6,6 +6,7 @@ from src.utilities.base_utility import get_cliente_operador_dni
 from src.configs import interactions
 from src.configs import unprocessed_interactions
 from datetime import date
+from src.utilities.db_utility import insert_interacciones
 
 
 # Process the calls to text and apply sentiment analysis
@@ -19,7 +20,7 @@ def process_call_recording():
         print(f"Procesando llamadas de la carpeta: {folder}")
         print(f"Lista de audios encontrados: {audios}")
 
-        id_catalogo_interaccion = get_id_catalogo_interaccion(folder) # [categoriainteraccion(FK)]
+        id_categoria_interaccion = get_id_catalogo_interaccion(folder) # [categoriainteraccion(FK)]
         id_medio_interaccion = interactions.LLAMADA # always call with id 1 [mediointeraccion(FK)]
 
         # loop over the audios under a given folder
@@ -33,7 +34,7 @@ def process_call_recording():
             dni_cliente = dni[1] # dni del cliente a utilizar para obtener el cliente id en la bd
 
             # call here the method to insert on tbInteracciones
-
+            insert_interacciones(dni_cliente, dni_operador, id_categoria_interaccion, id_medio_interaccion, call_date, text)
             # Analisis de Sentimiento (antes de aplicar analisis de sentimiento insert ontbInteracciones y retornar
             # el id)
             perform_sentiment_analysis(text)
@@ -68,13 +69,16 @@ def perform_sentiment_analysis(text):
 
     # decide sentiment as positive, negative and neutral
     if sentiment_dict['compound'] >= 0.05:
-        print("Positiva")
+        result = "Positiva"  # [resultado]
+        print(result)
 
     elif sentiment_dict['compound'] <= - 0.05:
-        print("Negativa")
+        result = "Negativa"
+        print(result)
 
     else:
-        print("Neutral")
+        result = "Neutral"
+        print(result)
 
     print("")
     # call here the method to insert on tbSentimientoInteracciones
