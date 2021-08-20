@@ -28,8 +28,9 @@ Tareas necesarias para realizar la implementación:
 - [x] Depende de el folder padre va a tener un id de medio de interacion asociado(llamada, chat)
 - [x] Para Llamada: Procesar el audio a texto y aplicar el analisis de sentimiento
 - [ ] Para Chat: Aplicar analisis de sentimiento a los chats
-- [ ] Dado el nombre de el archivo(audio, chat) consultar la base de datos, para obtener el id de el operador y el cliente
-- [ ] Realizar el insert en tbInteracciones y retornar el id de la interacción
+- [x] Crear un procedimiento almacenado que realice el insert en tbInteracciones
+- [x] El procedimiento almacenado consulta el id de el cliente y el operador, realizar el insert y retornar el id de la interacción
+- [ ] Crear un procedimiento almacenado que realice el insert en tbSentimientoInteracciones
 - [ ] Con el id de la interaccion realizar el insert en tbSentimientsInteracciones
 - [ ] Refactor
 - [ ] Crear el .bat para ejecutar los scripts
