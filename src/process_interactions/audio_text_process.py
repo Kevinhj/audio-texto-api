@@ -5,7 +5,6 @@ from src.utilities.base_utility import get_id_catalogo_interaccion
 from src.utilities.base_utility import get_cliente_operador_dni
 from src.configs import interactions
 from src.configs import unprocessed_interactions
-from datetime import date
 from src.utilities.db_utility import insert_interacciones
 from src.utilities.db_utility import insert_sentimiento_interaccion
 
