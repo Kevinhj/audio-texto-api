@@ -1,6 +1,6 @@
 import speech_recognition as sr
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from src.utilities.base_utility import get_audio_file_names
+from src.utilities.base_utility import get_audio_chat_file_names
 from src.utilities.base_utility import get_id_catalogo_interaccion
 from src.utilities.base_utility import get_cliente_operador_dni
 from src.configs import interactions
@@ -16,7 +16,7 @@ def process_call_recording():
 
     # loop en la carpeta de audios para obtener el nombre de los archivos
     for folder in audio_folder:
-        audios = get_audio_file_names(folder)
+        audios = get_audio_chat_file_names(folder)
         print("============================================")
         print(f"Procesando llamadas de la carpeta: {folder}")
         print(f"Lista de audios encontrados: {audios}")
@@ -28,11 +28,11 @@ def process_call_recording():
         for audio in audios:
             text = convert_call_to_text(folder, audio) # [conversacion]
             print(text)
-            call_date = date.today() # [fechainteraccion]
 
-            dni = get_cliente_operador_dni(audio)
-            dni_operador = dni[0] # dni del operador a utilizar para obtener el operador id en la bd
-            dni_cliente = dni[1] # dni del cliente a utilizar para obtener el cliente id en la bd
+            dni_and_date = get_cliente_operador_dni(audio)
+            dni_operador = dni_and_date[0] # dni del operador a utilizar para obtener el operador id en la bd
+            dni_cliente = dni_and_date[1] # dni del cliente a utilizar para obtener el cliente id en la bd
+            call_date = dni_and_date[2]  # [fechainteraccion]
 
             # llama metodo para insert en tbInteracciones
             id_interaccion = insert_interacciones(dni_cliente, dni_operador,
@@ -42,7 +42,7 @@ def process_call_recording():
             perform_sentiment_analysis(text, id_interaccion)
 
 
-# convert call to text, it receives the folder(informacion, matricula, etc) and the audio name
+# convierte la llamada a texto , recibe el folder(informacion, matricula, etc) y el nombre de el archivo
 def convert_call_to_text(folder, audio):
     call = sr.AudioFile(unprocessed_interactions.AUDIO_PATH + folder + '/' + audio)
     r = sr.Recognizer()
