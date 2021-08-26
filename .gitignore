@@ -129,4 +129,9 @@ dmypy.json
 .pyre/
 
 .idea/
-unprocessed_audio/
+unprocessed_interactions/audio/cobro
+unprocessed_interactions/audio/informacion
+unprocessed_interactions/audio/matricula
+unprocessed_interactions/chat/cobro
+unprocessed_interactions/chat/informacion
+unprocessed_interactions/chat/matricula
